@@ -12,13 +12,23 @@ use GuzzleHttp;
 
 class GithubApi
 {
+    /**
+     * @var HttpClientInterface
+     */
+    private $httpClient;
 
-    public function getProfile($username)
+    public function __construct(HttpClientInterface $httpClient)
     {
-        $client = new GuzzleHttp\Client();
-        $response = $client->request('GET', 'https://api.github.com/users/' . $username);
-//        dump($response->getBody()->getContents());
-        $data = json_decode($response->getBody()->getContents(), true);
+        $this->httpClient = $httpClient;
+    }
+
+     public function getProfile($username)
+    {
+//        $client = new GuzzleHttp\Client();
+//        $response = $client->request('GET', 'https://api.github.com/users/' . $username);
+//        $data = json_decode($response->getBody()->getContents(), true);
+
+        $data = $this->httpClient->get('https://api.github.com/users/' . $username);
 
         return ['avatar_url' => $data['avatar_url'],
             'name' => $data['name'],
@@ -34,6 +44,21 @@ class GithubApi
                 "Followers" => $data['followers'],
                 "Following" => $data['following'],
             ],
+        ];
+    }
+
+    public function getRepos($username)
+    {
+//        $client = new GuzzleHttp\Client();
+//        $response = $client->request('GET', 'https://api.github.com/users/' . $username . '/repos');
+//        $data = json_decode($response->getBody()->getContents(), true);
+
+        $data = $this->httpClient->get('https://api.github.com/users/' . $username . '/repos');
+        return ['repo_count' => count($data),
+            'most_stars' => array_reduce($data, function ($mostStars, $currentRepo) {
+                return $currentRepo['stargazers_count'] > $mostStars ? $currentRepo['stargazers_count'] : $mostStars;
+            }, 0),
+            'repos' => $data,
         ];
     }
 }

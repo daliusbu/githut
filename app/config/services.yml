@@ -34,5 +34,13 @@ services:
     #     arguments:
     #         $someArgument: 'some_value'
 
-    github_Api:
-        class: AppBundle\Service\GithubApi
+    guzzle_http_client:
+      class: 'AppBundle\Service\GuzzleHttpClient'
+      public: true
+
+
+    github_api:
+        class: 'AppBundle\Service\GithubApi'
+        public: true
+        arguments:
+          - "@guzzle_http_client"
