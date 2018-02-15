@@ -1,0 +1,22 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+
+    <h1>Sveiki apsilankę pieštuko parduotuvėje!</h1>
+
+    <p>JŪS dar nežinote, kad neturite svarbiausio dalyko gyvenime - MŪSŲ pieštuko!</p>
+    <p>Kokia iš jo nauda? - NEPAPRASTAI DIDŽIULĖ: </p>
+    <ul>
+        <li>Pieštukas visų pirma skirtas piešti, todėl turėdami jį bet kada ir betkur galėsite
+        nupiešti mylimosios paveikslą</li>
+        <li>Norite papraštyti patikusios panelės telefono numerio - ji tikrai neatsakys, jei pasiūlysite PIEŠTUKU užrašyti jums ant rankos</li>
+    <li>Užpuolė parke nevidonai - gerai padrožtu PIEŠTUKU apsiginsite lengvai</li>
+        <li>Beje - pieštuko rašalas tikrai nepasibaigs vidury paskaitos svarbios, o jeigu jis nulūštų, juk galite padrožti nors ir dantimis</li>
+        <li>Pieštuku galima ir pasišviesti - jeigu uždegtą nešite tamsią naktį, jis ir vilkus dar atbaidys</li>
+   <li>Daugybė dar yra kitų PIEŠTUKO didelių naudų - papasakosite apie jas vaikams, kai išbandysite jį saviems tikslams!</li>
+    </ul>
+    <hr>
+
+    {% include 'Shop/Items/items.html.twig' %}
+
+{% endblock %}

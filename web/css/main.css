@@ -1,0 +1,17 @@
+html{
+    background-image: url("../img/pencils2.jpg");
+}
+
+body{
+    padding-top: 60px;
+}
+.img-item{
+    max-width: 100px;
+    padding: 10px;
+}
+.table-items{
+    width: 100%;
+}
+.form-cell-100{
+    max-width: 100px;
+}

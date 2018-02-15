@@ -1,0 +1,48 @@
+{% block body %}
+
+    <div class="row">
+
+        <table class="table-responsive table-striped table-items">
+            <thead>
+            <tr>
+                <th class="text-center" colspan="2">Prekė</th>
+                <th>Kaina, EUR</th>
+                <th>Kiekis</th>
+                <th>Užsakymas</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr>
+                <td>
+
+                    <img class="img-responsive img-item"
+                         src="https://cdn.shopify.com/s/files/1/0644/2421/products/il_570xN.942576392_jg7o_1024x1024.jpg?v=1481581645"
+                         alt="Piestukas">
+
+                </td>
+                <td>
+                    <h4>Pieštukas. Paprastas. Labai geras</h4>
+                    <p>Nemokamai pridedame trintuką pieštuko gale!</p>
+                </td>
+                <td>
+                    120
+                </td>
+                <form action="{{ app.request.getSchemeAndHttpHost() ~ '/confOrder'}}" name="formOrder">
+                    <td>
+                        <input type="text" name="orderQnt" size="3" value="1">
+                    </td>
+                    <td>
+                        <input class="btn btn-info" type="submit" value="Užsakyti">
+                    </td>
+                </form>
+            </tr>
+            </tbody>
+
+        </table>
+
+    </div>
+
+    <br>
+    <br>
+
+{% endblock %}
