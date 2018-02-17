@@ -8,6 +8,7 @@
 
 namespace AppBundle\Entity;
 
+use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Validator\Constraints as Assert;
 use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
@@ -35,10 +36,21 @@ class User implements UserInterface, \Serializable
     private $username;
 
     /**
+     * @ORM\Column(type="string", length=25)
+     */
+    private $roles;
+
+    /**
      * @Assert\NotBlank()
      * @Assert\Length(max=4096)
      */
     private $plainPassword;
+
+    /**
+     * @ORM\Column(type="string", length=60)
+     *
+     */
+    private $firstName;
 
     /**
      * @ORM\Column(type="string", length=64)
@@ -77,28 +89,44 @@ class User implements UserInterface, \Serializable
      */
     private $address;
 
+    /**
+     * @ORM\OneToMany(targetEntity="Order", mappedBy="user")
+     */
+    private $orders;
 
 
 //    ------------- Constructor -----------------------------------------------
 
-    public function __construct()
+    public function __construct($roles = "ROLE_USER")
     {
         $this->isActive = true;
+        $this->orders = new ArrayCollection();
+        $this->setRoles($roles);
+
         // may not be needed, see section on salt below
         // $this->salt = md5(uniqid('', true));
     }
 
 
+
 //    ------------- Getters -----------------------------------------------
+
+
+    public function getId()
+    {
+        return $this->id;
+    }
+
+    public function getisActive()
+    {
+        return $this->isActive;
+    }
 
     public function getUsername()
     {
         return $this->email;
     }
 
-    /**
-     * @return mixed
-     */
     public function getEmail()
     {
         return $this->email;
@@ -121,7 +149,8 @@ class User implements UserInterface, \Serializable
 
     public function getRoles()
     {
-        return array('ROLE_USER');
+//        return array('ROLE_USER');
+        return [$this->roles];
     }
 
      public function getPhone()
@@ -144,9 +173,21 @@ class User implements UserInterface, \Serializable
         return $this->address;
     }
 
+    public function getFirstName()
+    {
+        return $this->firstName;
+    }
+
+    public function getOrders()
+    {
+        return $this->orders;
+    }
+
+
 
 
 //    ------------- Setters -----------------------------------------------
+
 
     /**
      * @param mixed $email
@@ -154,6 +195,7 @@ class User implements UserInterface, \Serializable
     public function setEmail($email)
     {
         $this->email = $email;
+        $this->username = $email;
     }
 
     /**
@@ -162,6 +204,14 @@ class User implements UserInterface, \Serializable
     public function setUsername($username)
     {
         $this->username = $username;
+    }
+
+    /**
+     * @param mixed $roles
+     */
+    public function setRoles($roles)
+    {
+        $this->roles = $roles;
     }
 
     /**
@@ -219,6 +269,21 @@ class User implements UserInterface, \Serializable
     {
         $this->address = $address;
     }
+
+
+    public function setFirstName($firstName)
+    {
+        $this->firstName = $firstName;
+    }
+
+    /**
+     * @param mixed $orders
+     */
+    public function setOrders($orders)
+    {
+        $this->orders = $orders;
+    }
+
 
 
 //    ------------- Other methods -----------------------------------------------

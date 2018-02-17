@@ -24,13 +24,13 @@ class UserType extends AbstractType
     {
         $builder
             ->add('email', EmailType::class, [
-                'label'=>'El. paštas'
+                'label'=>'El. paštas (ir prisijungimo vardas)'
             ])
-            ->add('username', TextType::class, [
-                'label'=>'Pavardė'
+            ->add('firstName', TextType::class, [
+                'label'=>'Vardas'
             ])
             ->add('lastName', TextType::class, [
-                'label'=>'Vardas'
+                'label'=>'Pavardė'
             ])
             ->add('phone', TextType::class, [
                 'label'=>'Telefonas'

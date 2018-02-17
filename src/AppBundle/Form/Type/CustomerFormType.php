@@ -24,7 +24,7 @@ class CustomerFormType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-            ->add('name', TextType::class, [
+            ->add('firstName', TextType::class, [
                 'label'=>'Vardas'
             ])
             ->add('lastname', TextType::class, [

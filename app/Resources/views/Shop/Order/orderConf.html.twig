@@ -16,71 +16,75 @@
         <tbody>
 
         <tr>
-            <td>{{ customer.Name }}</td>
-            <td>{{ customer.LastName }}</td>
-            <td>{{ customer.Email }}</td>
-            <td>{{ customer.City ~ ", " ~ customer.Address }}</td>
+            <td>{{ app.user.firstName }}</td>
+            <td>{{ app.user.lastName }}</td>
+            <td>{{ app.user.email }}</td>
+            <td>{{ app.user.city ~ ", " ~ app.user.address }}</td>
         </tr>
         </tbody>
     </table>
 
     <br>
-    <h4 class="text-center">Prašome patikrinti ir patvirtinti savo užsakymą:</h4>
-    <hr/>
+    <div class="alert alert-danger space-bot100">
+        <h3 class="text-center"><strong>Prašome patikrinti ir patvirtinti savo užsakymą!</strong></h3>
+
+        {{ form_start(formOrder) }}
 
 
-    {{ form_start(formOrder) }}
+        {#{{ form_widget(formOrder.user, { 'attr': { 'value': app.user.id} }) }}#}
+        {#{{ form_errors(formOrder.user) }}#}
 
+        <table class="table table-striped table-bordered">
+            <thead>
+            <tr>
+                <th>Nr.</th>
+                <th>Prekė</th>
+                <th>Kaina</th>
+                <th>Kiekis</th>
+                <th>Suma</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr>
+                <td>
+                    1.
+                </td>
+                <td>
+                    {{ form_widget(formOrder.item, { 'attr': { 'value':'Pieštukas', 'readonly': 'true'} }) }}
+                    {{ form_errors(formOrder.item) }}
+                </td>
+                <td>
+                    {{ form_widget(formOrder.price, { 'attr': { 'class':'form-cell-100', 'value':12.34, 'readonly': 'true'} }) }}
+                    {{ form_errors(formOrder.price) }}
+                </td>
+                <td>
+                    {{ form_widget(formOrder.qnt, { 'attr': { 'class':'form-cell-100', 'value': orderQnt, 'readonly': 'true' } }) }}
+                    {{ form_errors(formOrder.qnt) }}
+                </td>
+                <td>
+                    {{ form_widget(formOrder.sum, { 'attr': { 'class':'form-cell-100', 'value': orderQnt * 120.34, 'readonly': 'true'  } }) }}
+                    {{ form_errors(formOrder.sum) }}
+                </td>
+            </tr>
+            </tbody>
+        </table>
 
-    {{ form_widget(formOrder.customerId, { 'attr': { 'value': customer.Email} }) }}
-    {{ form_errors(formOrder.customerId) }}
+        <div class="col-sm-12">
+            <div class="pull-right">
+                {{ form_widget(formOrder.submit) }}
 
-    <table class="table table-striped table-bordered">
-        <thead>
-        <tr>
-            <th>Nr.</th>
-            <th>Prekė</th>
-            <th>Kaina</th>
-            <th>Kiekis</th>
-            <th>Suma</th>
-        </tr>
-        </thead>
-        <tbody>
-        <tr>
-            <td>
-                1.
-            </td>
-            <td>
-                {{ form_widget(formOrder.item, { 'attr': { 'value':'Piestukas', 'readonly': 'true'} }) }}
-                {{ form_errors(formOrder.item) }}
-            </td>
-            <td>
-                {{ form_widget(formOrder.price, { 'attr': { 'class':'form-cell-100', 'value':120.34, 'readonly': 'true'} }) }}
-                {{ form_errors(formOrder.price) }}
-            </td>
-            <td>
-                {{ form_widget(formOrder.qnt, { 'attr': { 'class':'form-cell-100', 'value': orderQnt } }) }}
-                {{ form_errors(formOrder.qnt) }}
-            </td>
-            <td>
-                {{ form_widget(formOrder.sum, { 'attr': { 'class':'form-cell-100', 'value': orderQnt * 120.34  } }) }}
-                {{ form_errors(formOrder.sum) }}
-            </td>
-        </tr>
-        </tbody>
-    </table>
+                <a href="{{ app.request.getSchemeAndHttpHost() ~ '/' }}">
+                    <button type="button" class="btn btn-danger">Grįžti</button>
+                </a>
+            </div>
 
-    <div class="col-sm-12">
-        <div class="pull-right">
-            {{ form_widget(formOrder.submit) }}
-
-            <a href="{{ app.request.getSchemeAndHttpHost() ~ '/' }}">
-                <button type="button" class="btn btn-danger">Atšaukti</button>
-            </a>
         </div>
+        {{ form_end(formOrder) }}
 
     </div>
-    {{ form_end(formOrder) }}
+
+
+
 
     <br><br>
 

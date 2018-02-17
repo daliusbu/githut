@@ -59,10 +59,7 @@ class ShopController extends Controller
      */
     public function homeAction(Request $request)
     {
-
-        return $this->render('Shop/index.html.twig', [
-            'customerName' => 'Lietuva'
-        ]);
+        return $this->render('Shop/index.html.twig', []);
     }
 
     /**
@@ -88,7 +85,6 @@ class ShopController extends Controller
         ]);
     }
 
-
     private function sendMail($body)
     {
         $mail = \Swift_Message::newInstance()
@@ -100,44 +96,26 @@ class ShopController extends Controller
         $this->get('mailer')->send($mail);
     }
 
-
-    /**
-     * @Route("/customers", name="customers")
-     */
-    public function listAction()
-    {
-        $customers = $this->getDoctrine()->getRepository('AppBundle:Customer')->findAll();
-        dump($customers);
-
-        return $this->render('Shop/customList.html.twig', [
-            'customers' => $customers
-        ]);
-    }
-
-
     /**
      * @Route("/confOrder", name="confOrder")
      */
     public function confOrderAction(Request $request)
     {
         $orderQnt = $request->get('orderQnt');
-        $customer = $this->getDoctrine()->getRepository('AppBundle:Customer')->findOneBy(array('name' => 'Pranas'));
-
+        $user = $this->getUser();
         $formOrder = $this->createForm(OrderFormType::class);
-
         $formOrder->handleRequest($request);
 
         if ($formOrder->isSubmitted() && $formOrder->isValid()) {
-
             $em = $this->getDoctrine()->getManager();
             $order = $formOrder->getData();
+            $order -> setUser($user);
             $em->persist($order);
             $em->flush();
             return $this->redirectToRoute('home');
         }
 
         return $this->render('Shop/Order/orderConf.html.twig', [
-            'customer' => $customer,
             'orderQnt'=>$orderQnt,
             'formOrder' => $formOrder->createView(),
         ]);

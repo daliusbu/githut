@@ -1,0 +1,60 @@
+{% extends 'base.html.twig' %}
+
+
+
+{% block body %}
+    <h3>Parduotuvės užsakymai</h3>
+
+    <table class="table table-striped">
+        <thead>
+        <tr>
+            <td></td>
+            <td>
+                <form action="{{ path('orders') }}">
+                    <input class="input-sm" type="text" name="item" placeholder="FILTRUOTI">
+                    <button type="submit"><i class="glyphicon glyphicon-zoom-in"></i></button>
+                </form>
+            </td>
+            <td>
+                <form action="{{ path('orders') }}">
+                    <input class="input-sm" type="text" name="qnt" placeholder="FILTRUOTI" size="3">
+                    <button type="submit"><i class="glyphicon glyphicon-zoom-in"></i></button>                </form>
+            </td>
+            <td>
+                <form action="{{ path('orders') }}">
+                    <input class="input-sm" type="text" name="sum" placeholder="FILTRUOTI" size="5">
+                    <button type="submit"><i class="glyphicon glyphicon-zoom-in"></i></button>                </form>
+            </td>
+            <td></td>
+            <td></td>
+        </tr>
+        <tr>
+            <th>Vartotojas</th>
+            <th>{{ knp_pagination_sortable(orders, 'Prekė', 'item') }}</th>
+            <th>{{ knp_pagination_sortable(orders, 'Kiekis', 'qnt') }}</th>
+            <th>{{ knp_pagination_sortable(orders, 'Suma', 'sum') }}</th>
+            <th>{{ knp_pagination_sortable(orders, 'Data', 'date') }}</th>
+            <th>Adresas</th>
+        </tr>
+        </thead>
+        <tbody>
+
+        {% for order in orders %}
+            <tr>
+                <td>{{ order.user.firstName ~ ' ' ~ order.user.lastName }}</td>
+                <td>{{ order.item }}</td>
+                <td>{{ order.qnt }}</td>
+                <td>{{ order.sum }}</td>
+                <td>{{ order.date|date('Y-m-d') }}</td>
+                <td>{{ order.user.city ~ ', ' ~ order.user.address }}</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+    <div class="navigation">
+        {{ knp_pagination_render(orders) }}
+    </div>
+
+
+{% endblock %}

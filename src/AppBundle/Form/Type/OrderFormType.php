@@ -26,12 +26,7 @@ class OrderFormType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-            ->add('customerId', HiddenType::class, [
-                'label' => 'Registracijos vardas (el.paštas)',
-                'attr' => [
-                    'class' => 'form-group'
-                ]
-            ])
+//            ->add('user', HiddenType::class)
             ->add('item', TextType::class, [
                 'label' => 'Prekė'
             ])
@@ -44,7 +39,6 @@ class OrderFormType extends AbstractType
             ->add('sum', MoneyType::class, [
                 'label' => 'Suma'
             ])
-
             ->add('submit', SubmitType::class, [
                 'label' => 'Patvirtinti',
                 'attr' => [
@@ -56,7 +50,7 @@ class OrderFormType extends AbstractType
     public function configureOptions(OptionsResolver $resolver)
     {
         $resolver->setDefaults(array(
-            'data_class' => 'AppBundle\Entity\NewOrder',
+            'data_class' => 'AppBundle\Entity\Order',
         ));
     }
 }

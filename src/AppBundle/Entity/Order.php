@@ -12,9 +12,9 @@ use Doctrine\ORM\Mapping as ORM;
 
 /**
  * @ORM\Entity
- * @ORM\Table(name="newOrder")
+ * @ORM\Table(name="orders")
  */
-class NewOrder
+class Order
 {
 
     public function __construct()
@@ -29,15 +29,10 @@ class NewOrder
      */
     private $id;
 
-    /**
-     * @ORM\Column(type="string", length=50)
-     *
-     */
-    private $customerId;
-
-    /**
+      /**
      * @ORM\Column(type="string", length=20)
      */
+
     private $item;
 
     /**
@@ -53,7 +48,7 @@ class NewOrder
      /**
      * @ORM\Column(type="boolean", length=30, nullable=true)
      */
-    private $sentOut;
+    private $delivered;
 
     /**
      * @ORM\Column(type="float", length=20, nullable=true)
@@ -65,21 +60,21 @@ class NewOrder
       */
     private $sum;
 
+    /**
+     * @ORM\ManyToOne(targetEntity="User", inversedBy="orders" )
+     * @ORM\JoinColumn(name="user_id", referencedColumnName="id")
+     */
+    private $user;
 
+
+
+//    -------------- Getters and Setters --------------------
     /**
      * @return mixed
      */
-    public function getCustomerId()
+    public function getId()
     {
-        return $this->customerId;
-    }
-
-    /**
-     * @param mixed $customerId
-     */
-    public function setCustomerId($customerId)
-    {
-        $this->customerId = $customerId;
+        return $this->id;
     }
 
     /**
@@ -133,17 +128,17 @@ class NewOrder
     /**
      * @return mixed
      */
-    public function getSentOut()
+    public function getDelivered()
     {
-        return $this->sentOut;
+        return $this->delivered;
     }
 
     /**
      * @param mixed $sentOut
      */
-    public function setSentOut($sentOut)
+    public function setDelivered($delivered)
     {
-        $this->sentOut = $sentOut;
+        $this->delivered = $delivered;
     }
 
     /**
@@ -176,6 +171,19 @@ class NewOrder
     public function setSum($sum)
     {
         $this->sum = $sum;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getUser()
+    {
+        return $this->user;
+    }
+
+    public function setUser($user)
+    {
+        $this->user = $user;
     }
 
 
