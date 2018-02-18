@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="2bcf4dcb-0ac5-4ea0-a000-044bb0401635" name="Default" comment="Updated production config">
+    <list default="true" id="2bcf4dcb-0ac5-4ea0-a000-044bb0401635" name="Default" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -431,7 +431,7 @@
       <workItem from="1518105389657" duration="133589000" />
       <workItem from="1518708552192" duration="73330000" />
       <workItem from="1518950281220" duration="297000" />
-      <workItem from="1518951217059" duration="3844000" />
+      <workItem from="1518951217059" duration="3930000" />
     </task>
     <task id="LOCAL-00001" summary="Veikia registration ir login">
       <created>1518708892592</created>
@@ -468,11 +468,18 @@
       <option name="project" value="LOCAL" />
       <updated>1518956443128</updated>
     </task>
-    <option name="localTasksCounter" value="6" />
+    <task id="LOCAL-00006" summary="Updated production config">
+      <created>1518956460020</created>
+      <option name="number" value="00006" />
+      <option name="presentableId" value="LOCAL-00006" />
+      <option name="project" value="LOCAL" />
+      <updated>1518956460020</updated>
+    </task>
+    <option name="localTasksCounter" value="7" />
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="296948000" />
+    <option name="totallyTimeSpent" value="297034000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="41" y="137" width="1366" height="710" extended-state="6" />
@@ -513,9 +520,9 @@
     <MESSAGE value="Veikia registration ir login" />
     <MESSAGE value="Priespakutine diena" />
     <MESSAGE value="Pries Heroku" />
-    <MESSAGE value="Updated production config" />
     <MESSAGE value="Pakeistas app_dev" />
-    <option name="LAST_COMMIT_MESSAGE" value="Pakeistas app_dev" />
+    <MESSAGE value="Updated production config" />
+    <option name="LAST_COMMIT_MESSAGE" value="Updated production config" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
